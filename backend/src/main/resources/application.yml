@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: Online Ankete i Glasanja
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/pollhub}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:postgres}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      initialization-fail-timeout: -1
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: none
+    open-in-view: false
+    properties:
+      hibernate:
+        boot:
+          allow_jdbc_metadata_access: false
