@@ -43,6 +43,21 @@ public class GlobalExceptionHandler {
         return response(HttpStatus.INTERNAL_SERVER_ERROR, "Required role is not available", Map.of());
     }
 
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleNotFound(ResourceNotFoundException exception) {
+        return response(HttpStatus.NOT_FOUND, exception.getMessage(), Map.of());
+    }
+
+    @ExceptionHandler(BusinessRuleException.class)
+    public ResponseEntity<ErrorResponse> handleBusinessRule(BusinessRuleException exception) {
+        return response(HttpStatus.CONFLICT, exception.getMessage(), Map.of());
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<ErrorResponse> handleIllegalArgument(IllegalArgumentException exception) {
+        return response(HttpStatus.BAD_REQUEST, exception.getMessage(), Map.of());
+    }
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleUnexpected(Exception exception) {
         return response(HttpStatus.INTERNAL_SERVER_ERROR, "An unexpected error occurred", Map.of());

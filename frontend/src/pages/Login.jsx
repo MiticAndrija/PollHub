@@ -1,5 +1,1 @@
-function Login() {
-  return <h1>Prijava</h1>
-}
-
-export default Login
+import{useState}from'react';import{Link,useNavigate}from'react-router-dom';import{login}from'../services/authService';import{errorMessage}from'../services/api';import{useAuth}from'../context/AuthContext';export default function Login(){const[form,setForm]=useState({email:'',password:''});const[error,setError]=useState('');const[loading,setLoading]=useState(false);const{signIn}=useAuth();const nav=useNavigate();const submit=async e=>{e.preventDefault();setLoading(true);try{const data=await login(form);signIn(data);nav('/polls')}catch(x){setError(errorMessage(x))}finally{setLoading(false)}};return <section className="narrow"><h1>Prijava</h1><form className="form card" onSubmit={submit}><label>Email<input required type="email" value={form.email} onChange={e=>setForm({...form,email:e.target.value})}/></label><label>Lozinka<input required type="password" value={form.password} onChange={e=>setForm({...form,password:e.target.value})}/></label>{error&&<p className="error">{error}</p>}<button disabled={loading}>{loading?'Prijavljivanje...':'Prijavi se'}</button><p>Nemaš nalog? <Link to="/register">Registruj se</Link>.</p></form></section>}

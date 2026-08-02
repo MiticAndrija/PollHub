@@ -1,5 +1,1 @@
-function Home() {
-  return <h1>Online Ankete i Glasanja</h1>
-}
-
-export default Home
+import{Link}from'react-router-dom';import{useAuth}from'../context/AuthContext';export default function Home(){const{user}=useAuth();return <section className="hero"><h1>Online ankete i glasanje</h1><p>Kreirajte ankete, podelite ih i saznajte mišljenje zajednice.</p>{user?<Link className="button" to="/polls">Pregledaj aktivne ankete</Link>:<><Link className="button" to="/register">Napravi nalog</Link> <Link className="button secondary" to="/login">Prijava</Link></>}</section>}

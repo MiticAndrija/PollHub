@@ -1,5 +1,1 @@
-function Register() {
-  return <h1>Registracija</h1>
-}
-
-export default Register
+import{useState}from'react';import{useNavigate,Link}from'react-router-dom';import{register}from'../services/authService';import{errorMessage}from'../services/api';export default function Register(){const[form,setForm]=useState({firstName:'',lastName:'',email:'',password:''});const[error,setError]=useState('');const nav=useNavigate();const submit=async e=>{e.preventDefault();try{await register(form);nav('/login',{state:{message:'Registracija je uspešna. Sada se prijavite.'}})}catch(x){setError(errorMessage(x))}};return <section className="narrow"><h1>Registracija</h1><form className="form card" onSubmit={submit}>{[['firstName','Ime','text'],['lastName','Prezime','text'],['email','Email','email'],['password','Lozinka (najmanje 8 karaktera)','password']].map(([name,label,type])=><label key={name}>{label}<input required minLength={name==='password'?8:undefined} type={type} value={form[name]} onChange={e=>setForm({...form,[name]:e.target.value})}/></label>)}{error&&<p className="error">{error}</p>}<button>Registruj se</button><p>Već imaš nalog? <Link to="/login">Prijavi se</Link>.</p></form></section>}

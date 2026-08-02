@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:pollhub;MODE=PostgreSQL;DB_CLOSE_DELAY=-1
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        boot:
+          allow_jdbc_metadata_access: true
+jwt:
+  secret: ZGV2ZWxvcG1lbnQtcG9sbGh1Yi1qd3Qtc2VjcmV0LWtleS1tdXN0LWJlLWF0LWxlYXN0LTMyLWJ5dGVzLWxvbmc=
+  expiration: 86400000
